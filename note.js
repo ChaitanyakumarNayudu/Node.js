@@ -32,8 +32,10 @@ var saveNotes = (notes) => {
         console.log("Getting all notes");
     };
 
-    var readNote = (title, body) => {
-        console.log("Reading note", title, body);
+    var readNote = (title) => {
+       var notes = fetchNotes();
+       var filteredNotes = notes.filter((note) => note.title === title);
+       return filteredNotes[0];
     };
 
     var removeNote = (title) => {
