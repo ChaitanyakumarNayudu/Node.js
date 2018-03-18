@@ -1,5 +1,3 @@
-console.log('Starting app.');
-
 const fs = require('fs');
 const _ = require('lodash');
 const yargs = require('yargs');
@@ -9,9 +7,6 @@ var notes = require('./note');
 var argv = yargs.argv;
 
 var command = process.argv[2];
-console.log("Command: " + command);
-
-console.log('yargs:',  argv);
 
 if(command === 'add') {
     var note = notes.addNote(argv.title, argv.body);
@@ -22,7 +17,9 @@ if(command === 'add') {
         console.log("Note title is already taken");
     }
 } else if(command === 'list') {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log(`Printing ${allNotes.length} note(s).`)
+    allNotes.forEach(note => notes.logNote(note));
 } else if(command === 'read') {
    var note =  notes.readNote(argv.title);
    if(note) {
